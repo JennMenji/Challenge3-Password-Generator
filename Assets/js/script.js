@@ -94,9 +94,9 @@ var lowercaseChar = [
   "z",
 ];
 var randomNumber = function () {
-  var numberCharacter = Math.floor(Math.random() * 10);
+  var numberChar = Math.floor(Math.random() * 10);
 
-  return numberCharacter;
+  console.log(numberChar);
 };
 
 //Prompt for User to select password length from 8-128
@@ -114,50 +114,40 @@ var passwordLength = function () {
   }
 };
 
-var randomUppercase = function () {
+var uppercase = function () {
   var uppercaseConfirm = confirm(
     "Would you like to include Uppercase characters in your password?"
   );
-
-  if (uppercaseConfirm) {
-    var uppercaseInputs =
-      uppercaseChar[Math.floor(Math.random() * uppercaseChar.length)];
-    console.log(uppercaseInputs);
-  }
 };
 
-var randomLowercase = function () {
+var getRandomLowercase = function () {
   var lowercaseConfirm = confirm(
     "Would you like to include Lowercase characters in your password?"
   );
-
-  if (lowercaseConfirm) {
-    console.log(lowercaseConfirm);
-
-    var lowercaseInputs = "";
-    for (var i = 0; i <= length - 1; i++) {
-      var lowercaseInputs =
-        lowercaseInputs +
-        lowercaseChar[Math.floor(Math.random() * lowercaseChar.length)];
-    }
-    console.log(lowercaseInputs);
-  } else {
-    randomxx();
-  }
-  //if yes, then fucntion to choose a random array of uppercase letters
-  //if false, then move on to next question
 };
 
-var generatePassword = function () {
+var getRandomSymbol = function () {
+  var symbolConfirm = confirm(
+    "Would you like to include Number characters in your password?"
+  );
+};
+
+var getRandomNumber = function () {
+  var numberConfirm = confirm(
+    "Would you like to include Symbols & Special characters in your password?"
+  );
+};
+
+var generatePassword = function (upper, lower, number, symbol, length) {
+  // 1. create/int password var
+  // 2. Filter false prompts
+  // 3. loop over the length then call generator function for each type
+  // 4. add final pw to the pwText.value and return
+  // 5. https://www.youtube.com/watch?v=duNmhKgtcsI
+
   passwordLength();
 
-  randomUppercase();
-
-  var randomPassword = "";
-  for (var i = 0; i <= length - 1; i++) {
-    var randomPassword = randomPassword + randomUppercase();
-  }
-  console.log(randomPassword);
+  uppercase();
 };
 
 // Write password to the #password input
