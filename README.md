@@ -13,11 +13,11 @@ The Challenge for week three involves creating an application that generates a r
 - Each input should be validated
 - At least one character type should be selected
 - When all prompts are answered then a password is generated that matches the selected criteria
-- The final generated password should display in an alert or written to the page
+- The final generated password should display in an alert or written to the page testing
 
 ### Final Website Screenshot
 
-![Website Screenshot] (./assets/images/screenshot.png)
+![Website Screenshot](./assets/images/screenshot.png)
 
 ### Website URL
 
