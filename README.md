@@ -17,7 +17,7 @@ The Challenge for week three involves creating an application that generates a r
 
 ### Final Website Screenshot
 
-![Website Screenshot](./assets/images/generator-screenshot.png)
+![Website Screenshot] (./assets/images/screenshot.png)
 
 ### Website URL
 
