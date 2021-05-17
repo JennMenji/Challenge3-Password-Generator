@@ -94,16 +94,16 @@ var lowercaseChar = [
   "z",
 ];
 
-//Object with Random Character Functions
+//Object with Random Character Values
 var characters = {
   uppercase: getRandomUppercase,
   lowercase: getRandomLowercase,
   special: getRandomSymbol,
   numerical: getRandomNumber,
-  //length: passwordLength,
+  length: passwordLength,
 };
 
-/*Prompt for User to select password length from 8-128
+//Function & Prompt for User to select password length from 8-128
 var passwordLength = function () {
   while (length === "" || length === null || length < 3 || length > 128) {
     length = prompt(
@@ -116,7 +116,7 @@ var passwordLength = function () {
       alert("Please enter valid option.");
     }
   }
-};*/
+};
 
 //Functions to generate random characters
 var getRandomUppercase = function () {
@@ -191,17 +191,22 @@ var generatePassword = function (upper, lower, symbol, number, length) {
   // 2. Filter false prompts
   // 3. loop over the length then call generator function for each type
   // 4. add final pw to the pwText.value and return
+  passwordLength();
 
   var generatedPassword = "";
 
-  var typesCount = upper + lower + symbol + number;
-
-  //passwordLength();
   characterPrompts();
-  getRandomUppercase();
-  getRandomLowercase();
-  getRandomSymbol();
-  getRandomNumber();
+
+  for (var i = 0; i <= length - 1; i++) {
+    charArray.forEach((prompt) => {
+      var testing = Object.keys(prompt)[0];
+      console.log("the value is ", testing);
+
+      generatedPassword += characters[testing]();
+    });
+  }
+
+  return generatedPassword;
 };
 
 // Write password to the #password input
@@ -211,40 +216,15 @@ function writePassword() {
 
   //console.log(passwordText);
   passwordText.value = password;
-  console.log(passwordText);
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-// Prompt displays when User clicks generate password
+// DONE >>>>> Prompt displays when User clicks generate password
 // DONE >>>>> Prompt for User to select password length from 8-128
-// Prompt for User to select which lowercase, uppercase, numeric, and/or special characters
-// Each inputs should be validated
-// At least one character type should be selected
+// DONE >>>>> Prompt for User to select which lowercase, uppercase, numeric, and/or special characters
+// DONE >>>>> Each inputs should be validated
+// DONE >>>>> At least one character type should be selected
 // Password should be generated once all prompts are answered that matches the selected criteria
 // Once the password is generated it should written to the page
-
-/*example of working uppercase
-
-var randomUppercase = function () {
-  var uppercaseConfirm = confirm(
-    "Would you like to include Uppercase characters in your password?"
-  );
-
-  if (uppercaseConfirm) {
-    console.log(uppercaseConfirm);
-
-    var uppercaseInputs = "";
-    for (var i = 0; i <= length - 1; i++) {
-      var uppercaseInputs =
-        uppercaseInputs +
-        uppercaseChar[Math.floor(Math.random() * uppercaseChar.length)];
-    }
-    console.log(uppercaseInputs);
-  } else {
-    //if false, then move return to the loop and ask next question
-  }
-};
-
-*/
