@@ -94,7 +94,6 @@ var lowercaseChar = [
   "z",
 ];
 
-//debugger;
 //Function & Prompt for User to select password length from 8-128
 function passwordLength() {
   while (length === "" || length === null || length < 8 || length > 128) {
@@ -139,8 +138,23 @@ function getRandomNumber() {
   return randomNumber;
 }
 
-//Character prompts
-var characterPrompts = function () {
+var generatePassword = function () {
+  // 1. create/int password var
+  // 2. Filter false prompts
+  // 3. loop over the length then call generator function for each type
+  // 4. add final pw to the pwText.value and return
+  //Object with Random Character Values
+
+  var characters = {
+    uppercase: getRandomUppercase(),
+    lowercase: getRandomLowercase(),
+    special: getRandomSymbol(),
+    numerical: getRandomNumber(),
+    length: passwordLength(),
+  };
+
+  var generatedPassword = "";
+  //Character prompts: Might need to make these individual functions outside of generate password function
   var uppercaseConfirm = confirm(
     "Would you like to include Uppercase characters in your password?"
   );
@@ -157,10 +171,21 @@ var characterPrompts = function () {
     "Would you like to include Symbols & Special characters in your password?"
   );
 
-  var promptCount =
-    uppercaseConfirm + lowercaseConfirm + symbolConfirm + numberConfirm;
-  console.log("User confirmed " + promptCount + " types of characters");
+  var characterPrompts = function () {
+    var promptCount =
+      uppercaseConfirm + lowercaseConfirm + symbolConfirm + numberConfirm;
+    console.log("User confirmed " + promptCount + " types of characters");
 
+    if (promptCount === 0) {
+      alert("You must select at least one character type.");
+      characterPrompts();
+    } else {
+      console.log(promptCount);
+      return promptCount;
+    }
+  };
+
+  //>>>might need to rewrite and/or move Object to provide proper values
   var charArray = [
     { uppercaseConfirm },
     { lowercaseConfirm },
@@ -169,28 +194,7 @@ var characterPrompts = function () {
   ].filter((item) => Object.values(item)[0]);
   console.log(charArray);
 
-  if (promptCount === 0) {
-    alert("You must select at least one character type.");
-    characterPrompts();
-  }
-};
-
-var generatePassword = function (upper, lower, symbol, number, length) {
-  // 1. create/int password var
-  // 2. Filter false prompts
-  // 3. loop over the length then call generator function for each type
-  // 4. add final pw to the pwText.value and return
-  //Object with Random Character Values
-
-  var characters = {
-    uppercase: getRandomUppercase(),
-    lowercase: getRandomLowercase(),
-    special: getRandomSymbol(),
-    numerical: getRandomNumber(),
-    length: passwordLength(),
-  };
-  var generatedPassword = "";
-  characterPrompts();
+  //console.log(promptCount);
   //passwordLength();
 
   console.log(
@@ -200,16 +204,17 @@ var generatePassword = function (upper, lower, symbol, number, length) {
     characters.numerical
     //characters.length
   );
-
+  // >>>Must fix for loop to generate password
   for (var i = 0; i <= length; i += promptCount) {
-    charArray.forEach((prompt) => {
-      var testing = Object.keys(prompt)[0];
+    charArray.forEach((characters) => {
+      var testing = Object.keys(characters)[0];
       console.log("the value is ", testing);
 
       generatedPassword += characters[testing]();
     });
+    console.log(generatedPassword);
   }
-  console.log(generatedPassword);
+
   return generatedPassword;
 };
 
