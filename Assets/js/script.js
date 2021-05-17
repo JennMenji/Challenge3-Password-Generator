@@ -94,6 +94,15 @@ var lowercaseChar = [
   "z",
 ];
 
+//Object with Random Character Functions
+var characters = {
+  uppercase: getRandomUppercase,
+  lowercase: getRandomLowercase,
+  special: getRandomSymbol,
+  numerical: getRandomNumber,
+  //length: passwordLength,
+};
+
 /*Prompt for User to select password length from 8-128
 var passwordLength = function () {
   while (length === "" || length === null || length < 3 || length > 128) {
@@ -142,7 +151,7 @@ var getRandomNumber = function () {
 };
 
 var generatePassword = function () {
-  /*var uppercaseConfirm = confirm(
+  var uppercaseConfirm = confirm(
     "Would you like to include Uppercase characters in your password?"
   );
 
@@ -156,8 +165,9 @@ var generatePassword = function () {
 
   var numberConfirm = confirm(
     "Would you like to include Symbols & Special characters in your password?"
-  );*/
+  );
 
+  console.log(uppercaseConfirm, lowercaseConfirm, symbolConfirm, numberConfirm);
   // 1. create/int password var
   // 2. Filter false prompts
   // 3. loop over the length then call generator function for each type
