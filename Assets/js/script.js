@@ -93,11 +93,6 @@ var lowercaseChar = [
   "y",
   "z",
 ];
-var randomNumber = function () {
-  var numberChar = Math.floor(Math.random() * 10);
-
-  console.log(numberChar);
-};
 
 /*Prompt for User to select password length from 8-128
 var passwordLength = function () {
@@ -114,22 +109,39 @@ var passwordLength = function () {
   }
 };*/
 
-function getRandomUppercase() {
-  var uppercaseInputs = "";
-  for (var i = 0; i <= length - 1; i++) {
-    var uppercaseInputs =
-      uppercaseInputs +
-      uppercaseChar[Math.floor(Math.random() * uppercaseChar.length)];
-  }
-}
+//Functions to generate random functions
+var getRandomUppercase = function () {
+  var randomUpper =
+    uppercaseChar[Math.floor(Math.random() * uppercaseChar.length)];
 
-//var getRandomLowercase = function () {};
+  console.log(randomUpper);
+  return randomUpper;
+};
 
-////var getRandomSymbol = function () {};
+var getRandomLowercase = function () {
+  var randomLower =
+    lowercaseChar[Math.floor(Math.random() * lowercaseChar.length)];
 
-//var getRandomNumber = function () {};
+  console.log(randomLower);
+  return randomLower;
+};
 
-var generatePassword = function (upper, lower, number, symbol, length) {
+var getRandomSymbol = function () {
+  var randomSymbol =
+    specialChar[Math.floor(Math.random() * specialChar.length)];
+
+  console.log(randomSymbol);
+  return randomSymbol;
+};
+
+var getRandomNumber = function () {
+  var randomNumber = Math.floor(Math.random() * 10);
+
+  console.log(randomNumber);
+  return randomNumber;
+};
+
+var generatePassword = function () {
   /*var uppercaseConfirm = confirm(
     "Would you like to include Uppercase characters in your password?"
   );
@@ -154,7 +166,10 @@ var generatePassword = function (upper, lower, number, symbol, length) {
 
   //passwordLength();
 
-  console.log(getRandomUppercase);
+  getRandomUppercase();
+  getRandomLowercase();
+  getRandomSymbol();
+  getRandomNumber();
 };
 
 // Write password to the #password input
