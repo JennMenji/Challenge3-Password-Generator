@@ -99,7 +99,7 @@ var randomNumber = function () {
   console.log(numberChar);
 };
 
-//Prompt for User to select password length from 8-128
+/*Prompt for User to select password length from 8-128
 var passwordLength = function () {
   while (length === "" || length === null || length < 3 || length > 128) {
     length = prompt(
@@ -112,42 +112,49 @@ var passwordLength = function () {
       alert("Please enter valid option.");
     }
   }
-};
+};*/
 
-var uppercase = function () {
-  var uppercaseConfirm = confirm(
+function getRandomUppercase() {
+  var uppercaseInputs = "";
+  for (var i = 0; i <= length - 1; i++) {
+    var uppercaseInputs =
+      uppercaseInputs +
+      uppercaseChar[Math.floor(Math.random() * uppercaseChar.length)];
+  }
+}
+
+//var getRandomLowercase = function () {};
+
+////var getRandomSymbol = function () {};
+
+//var getRandomNumber = function () {};
+
+var generatePassword = function (upper, lower, number, symbol, length) {
+  /*var uppercaseConfirm = confirm(
     "Would you like to include Uppercase characters in your password?"
   );
-};
 
-var getRandomLowercase = function () {
   var lowercaseConfirm = confirm(
     "Would you like to include Lowercase characters in your password?"
   );
-};
 
-var getRandomSymbol = function () {
   var symbolConfirm = confirm(
     "Would you like to include Number characters in your password?"
   );
-};
 
-var getRandomNumber = function () {
   var numberConfirm = confirm(
     "Would you like to include Symbols & Special characters in your password?"
-  );
-};
+  );*/
 
-var generatePassword = function (upper, lower, number, symbol, length) {
   // 1. create/int password var
   // 2. Filter false prompts
   // 3. loop over the length then call generator function for each type
   // 4. add final pw to the pwText.value and return
   // 5. https://www.youtube.com/watch?v=duNmhKgtcsI
 
-  passwordLength();
+  //passwordLength();
 
-  uppercase();
+  console.log(getRandomUppercase);
 };
 
 // Write password to the #password input
