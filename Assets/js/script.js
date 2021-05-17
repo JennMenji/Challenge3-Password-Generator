@@ -118,7 +118,7 @@ var passwordLength = function () {
   }
 };*/
 
-//Functions to generate random functions
+//Functions to generate random characters
 var getRandomUppercase = function () {
   var randomUpper =
     uppercaseChar[Math.floor(Math.random() * uppercaseChar.length)];
@@ -150,7 +150,8 @@ var getRandomNumber = function () {
   return randomNumber;
 };
 
-var generatePassword = function () {
+//Character prompts
+var characterPrompts = function () {
   var uppercaseConfirm = confirm(
     "Would you like to include Uppercase characters in your password?"
   );
@@ -167,15 +168,36 @@ var generatePassword = function () {
     "Would you like to include Symbols & Special characters in your password?"
   );
 
-  console.log(uppercaseConfirm, lowercaseConfirm, symbolConfirm, numberConfirm);
+  var promptCount =
+    uppercaseConfirm + lowercaseConfirm + symbolConfirm + numberConfirm;
+  console.log("User confirmed " + promptCount + " types of characters");
+
+  var charArray = [
+    { uppercaseConfirm },
+    { lowercaseConfirm },
+    { symbolConfirm },
+    { numberConfirm },
+  ].filter((item) => Object.values(item)[0]);
+  console.log(charArray);
+
+  if (promptCount === 0) {
+    alert("You must select at least one character type.");
+    characterPrompts();
+  }
+};
+
+var generatePassword = function (upper, lower, symbol, number, length) {
   // 1. create/int password var
   // 2. Filter false prompts
   // 3. loop over the length then call generator function for each type
   // 4. add final pw to the pwText.value and return
-  // 5. https://www.youtube.com/watch?v=duNmhKgtcsI
+
+  var generatedPassword = "";
+
+  var typesCount = upper + lower + symbol + number;
 
   //passwordLength();
-
+  characterPrompts();
   getRandomUppercase();
   getRandomLowercase();
   getRandomSymbol();
@@ -189,6 +211,7 @@ function writePassword() {
 
   //console.log(passwordText);
   passwordText.value = password;
+  console.log(passwordText);
 }
 
 // Add event listener to generate button
