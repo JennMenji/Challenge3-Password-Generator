@@ -94,8 +94,9 @@ var lowercaseChar = [
   "z",
 ];
 
+//debugger;
 //Function & Prompt for User to select password length from 8-128
-var passwordLength = function () {
+function passwordLength() {
   while (length === "" || length === null || length < 8 || length > 128) {
     length = prompt(
       "How many characters would you like to include in your password? Please select a number between 8-128."
@@ -107,44 +108,36 @@ var passwordLength = function () {
       alert("Please enter valid option.");
     }
   }
-};
+  return length;
+}
 
 //Functions to generate random characters
-var getRandomUppercase = function () {
+function getRandomUppercase() {
   var randomUpper =
     uppercaseChar[Math.floor(Math.random() * uppercaseChar.length)];
 
   return randomUpper;
-};
+}
 
-var getRandomLowercase = function () {
+function getRandomLowercase() {
   var randomLower =
     lowercaseChar[Math.floor(Math.random() * lowercaseChar.length)];
 
   return randomLower;
-};
+}
 
-var getRandomSymbol = function () {
+function getRandomSymbol() {
   var randomSymbol =
     specialChar[Math.floor(Math.random() * specialChar.length)];
 
   return randomSymbol;
-};
+}
 
-var getRandomNumber = function () {
+function getRandomNumber() {
   var randomNumber = Math.floor(Math.random() * 10);
 
   return randomNumber;
-};
-
-//Object with Random Character Values
-var characters = {
-  uppercase: getRandomUppercase(),
-  lowercase: getRandomLowercase(),
-  special: getRandomSymbol(),
-  numerical: getRandomNumber(),
-  length: passwordLength(),
-};
+}
 
 //Character prompts
 var characterPrompts = function () {
@@ -187,10 +180,18 @@ var generatePassword = function (upper, lower, symbol, number, length) {
   // 2. Filter false prompts
   // 3. loop over the length then call generator function for each type
   // 4. add final pw to the pwText.value and return
+  //Object with Random Character Values
 
+  var characters = {
+    uppercase: getRandomUppercase(),
+    lowercase: getRandomLowercase(),
+    special: getRandomSymbol(),
+    numerical: getRandomNumber(),
+    length: passwordLength(),
+  };
   var generatedPassword = "";
   characterPrompts();
-  passwordLength();
+  //passwordLength();
 
   console.log(
     characters.uppercase,
