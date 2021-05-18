@@ -119,27 +119,27 @@ function passwordLength() {
 //Functions to generate random characters
 function getRandomUppercase() {
   var randomUpper =
-    uppercaseChar[Math.floor(Math.random() * uppercaseChar.length)];
+    uppercaseChar[Math.floor(Math.random() * uppercaseChar.length - 1)];
 
   return randomUpper;
 }
 
 function getRandomLowercase() {
   var randomLower =
-    lowercaseChar[Math.floor(Math.random() * lowercaseChar.length)];
+    lowercaseChar[Math.floor(Math.random() * lowercaseChar.length - 1)];
 
   return randomLower;
 }
 
 function getRandomSymbol() {
   var randomSymbol =
-    specialChar[Math.floor(Math.random() * specialChar.length)];
+    specialChar[Math.floor(Math.random() * specialChar.length - 1)];
 
   return randomSymbol;
 }
 
 function getRandomNumber() {
-  var randomNumber = Math.floor(Math.random() * 10);
+  var randomNumber = Math.floor(Math.random() * 9);
 
   return randomNumber;
 }
@@ -180,18 +180,36 @@ var generatePassword = function () {
     }
   };
 
+  console.log(length);
   // >>>Must fix for loop to generate password
   for (var i = 0; i <= length; i++) {
     if (uppercaseConfirm) {
-      characters.concat("A");
-
+      generatedPassword += getRandomUppercase();
       length--;
-      console.log(characters);
+    }
+
+    if (lowercaseConfirm) {
+      generatedPassword += getRandomLowercase();
+      length--;
+    }
+
+    if (symbolConfirm) {
+      generatedPassword += getRandomSymbol();
+      length--;
+
+      console.log(generatedPassword);
+    }
+
+    if (numberConfirm) {
+      generatedPassword += getRandomNumber();
+      length--;
     }
   }
 
   return generatedPassword;
 };
+
+//return generatedPassword
 
 // Write password to the #password input
 function writePassword() {
