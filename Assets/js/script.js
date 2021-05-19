@@ -99,9 +99,10 @@ var lowercaseConfirm;
 var symbolConfirm;
 var numberConfirm;
 var characters = [];
+var passwordLength;
 
 //Function & Prompt for User to select password length from 8-128
-function passwordLength() {
+function lengthPrompt() {
   while (length === "" || length === null || length < 8 || length > 128) {
     length = prompt(
       "How many characters would you like to include in your password? Please select a number between 8-128."
@@ -113,27 +114,26 @@ function passwordLength() {
       alert("Please enter valid option.");
     }
   }
-  return length;
 }
 
 //Functions to generate random characters
 function getRandomUppercase() {
   var randomUpper =
-    uppercaseChar[Math.floor(Math.random() * uppercaseChar.length - 1)];
+    uppercaseChar[Math.floor(Math.random() * uppercaseChar.length)];
 
   return randomUpper;
 }
 
 function getRandomLowercase() {
   var randomLower =
-    lowercaseChar[Math.floor(Math.random() * lowercaseChar.length - 1)];
+    lowercaseChar[Math.floor(Math.random() * lowercaseChar.length)];
 
   return randomLower;
 }
 
 function getRandomSymbol() {
   var randomSymbol =
-    specialChar[Math.floor(Math.random() * specialChar.length - 1)];
+    specialChar[Math.floor(Math.random() * specialChar.length)];
 
   return randomSymbol;
 }
@@ -145,11 +145,11 @@ function getRandomNumber() {
 }
 
 var generatePassword = function () {
-  passwordLength();
-
   var generatedPassword = "";
 
-  //Character prompts: Might need to make these individual functions outside of generate password function
+  //prompts
+  lengthPrompt();
+
   uppercaseConfirm = confirm(
     "Would you like to include Uppercase characters in your password?"
   );
@@ -180,36 +180,41 @@ var generatePassword = function () {
     }
   };
 
-  console.log(length);
-  // >>>Must fix for loop to generate password
   for (var i = 0; i <= length; i++) {
     if (uppercaseConfirm) {
       generatedPassword += getRandomUppercase();
-      length--;
+    }
+
+    if (generatedPassword.length == length) {
+      return generatedPassword;
     }
 
     if (lowercaseConfirm) {
       generatedPassword += getRandomLowercase();
-      length--;
+    }
+
+    if (generatedPassword.length == length) {
+      return generatedPassword;
     }
 
     if (symbolConfirm) {
       generatedPassword += getRandomSymbol();
-      length--;
+    }
 
-      console.log(generatedPassword);
+    if (generatedPassword.length == length) {
+      return generatedPassword;
     }
 
     if (numberConfirm) {
       generatedPassword += getRandomNumber();
-      length--;
     }
+  }
+  if (generatedPassword.length == length) {
+    return generatedPassword;
   }
 
   return generatedPassword;
 };
-
-//return generatedPassword
 
 // Write password to the #password input
 function writePassword() {
@@ -222,11 +227,3 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-// DONE >>>>> Prompt displays when User clicks generate password
-// DONE >>>>> Prompt for User to select password length from 8-128
-// DONE >>>>> Prompt for User to select which lowercase, uppercase, numeric, and/or special characters
-// DONE >>>>> Each inputs should be validated
-// DONE >>>>> At least one character type should be selected
-// Password should be generated once all prompts are answered that matches the selected criteria
-// Once the password is generated it should written to the page
